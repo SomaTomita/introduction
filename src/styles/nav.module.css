@@ -1,0 +1,23 @@
+.list{
+	display: flex;
+	gap: 2em;
+}
+
+/* デスクトップ環境に適用 */
+@media (hover: hover){
+	.list a:hover{
+		color: var(--accent);
+	}
+}
+
+/* モバイル環境に適用(モバイル版はタップ後他の操作をするまでhoverが解除されない) */
+@media (hover: none){
+	.list a{
+		-webkit-tap-highlight-color: transparent;
+	}
+
+	/* リンク先が開くと:activeで解除 */
+	.list a:active {
+		color: var(--accent);
+	}
+}

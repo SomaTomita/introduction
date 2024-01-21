@@ -1,0 +1,34 @@
+/* ヘッダーとページネーション */
+.spaceBetween {
+	display: flex;
+	justify-content: space-between; /* 両端揃え */
+	align-items: center;
+  }
+ 
+
+  /* 横並び（デスクトップは横並び、モバイルでは縦並び） */
+  .sideBySide {
+	display: flex;
+	flex-direction: column;
+  }
+  @media (min-width: 768px) {
+	.sideBySide {
+	  flex-direction: row;
+	  justify-content: space-between;
+	}
+  }
+  
+
+  /* ヒーローとフッター */
+  /* 横並び（デスクトップ縦方向中央、モバイルは横方向中央揃え） */
+  .sideBySideCenter {
+	composes: sideBySide;
+	align-items: center;
+	text-align: center;
+  }
+  @media (min-width: 768px) {
+	.sideBySideCenter {
+	  text-align: left;
+	}
+  }
+  
