@@ -10,6 +10,7 @@
   
   
 	/* タイポグラフィ（フォントサイズ） */
+	/* clamp(MIN, VAL, MAX) の形式 /  もし VAL が MIN より小さい場合は MIN を、MAX より大きい場合は MAX を返す */
 	--body: clamp(1rem, 0.95rem + 0.2vw, 1.125rem); /* 16-18px */
 	--display: clamp(4.5rem, 1.83rem + 11.34vw, 10rem); /* 72-160 */
 	--heading1: clamp(2rem, 1.3rem + 3vw, 4rem); /* 32-64px */
@@ -39,6 +40,7 @@
 	color: var(--black);
 	/* フォントファミリーはOSにインストールされたシステムフォントを使うよう指定。 */
 	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial,
+	/* 、最終的にはどの指定フォントも利用できない場合は、ブラウザのデフォルトのサンセリフフォント (sans-serif) を使用 */
 	  sans-serif;
 	font-size: var(--body);
   }

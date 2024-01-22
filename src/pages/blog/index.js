@@ -1,5 +1,10 @@
+import Container from "src/components/container";
 import Hero from "src/components/hero";
 
 export default function Blog() {
-	return <Hero />
+	return (
+		<Container>
+			<Hero />
+		</Container>
+	)
 }
