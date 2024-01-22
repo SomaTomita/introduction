@@ -1,0 +1,27 @@
+/* .stack の最初の子要素以外のすべての子要素に適用 */
+.stack > * + * {
+	 /* --stack-spaceがない場合、1.5em をデフォルト値 */
+	margin-top: var(--stack-space, 1.5em);
+}
+  
+.stack h2,
+.stack h3 {
+	--stack-space: 2em;
+}
+
+/* .stack クラス内の h2 または h3 要素の直後に来るすべての要素に適用 */
+.stack h2 + *,
+.stack h3 + * {
+	--stack-space: 0.8em;
+}
+
+.stack p {
+	/* 1文の間をあけて読みやすくする */
+	line-height: 1.8;
+}
+
+/* リストはブラウザ標準のスタイルに戻すように指定。 */
+.stack ul {
+	padding: revert;
+	list-style: revert;
+}
