@@ -1,0 +1,30 @@
+.flexContainer {
+	composes: sideBySide from "./utils.module.css";
+	gap: var(--space-md);
+	margin: var(--space-md) 0 var(--space-lg);
+}
+
+@media (min-width: 768px) {
+	.main {
+	  width: 768px; /* 本文 */
+	}
+
+	.sidebar {
+		width: 240px; /* コンタクト情報 */
+		position: sticky; /* 下にスクロール時画面に固定 */
+		top: 40px; /* 固定時に上に確保する余白 */
+		align-self: flex-start;
+	  }
+  
+	.sidebar * {
+		text-align: right;
+	}
+  
+	/* fit-contentをすべての要素にあてるとsafariで崩れる */
+	.sidebar :is(div, ul) {
+		width: fit-content;
+		margin-left: auto;
+		place-items: flex-end;
+		place-content: flex-end;
+	  }
+}
