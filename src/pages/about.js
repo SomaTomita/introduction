@@ -3,12 +3,24 @@ import Hero from "src/components/hero";
 import PostBody from "src/components/post-body";
 import Contact from "src/components/contact";
 import TwoColumn, { TwoColumnMain, TwoColumnSidebar } from "../components/two-column";
+import Image from "next/image"
+import eyecatch from "../images/about_pug_1920*960.png"
 
 export default function About() {
 	return (
 		<Container>
 			<Hero title="About" subtitle="Comment" />
 
+			<figure>
+				<Image
+					src={eyecatch}
+					alt=""
+					layout="responsive"
+					sizes="(min-width: 1152px) 1152px, 100vw"
+					priority
+					placeholder="blur"
+				/>
+			</figure>
 			<TwoColumn>
 				<TwoColumnMain> {/* 本文 */}
 					<PostBody>
