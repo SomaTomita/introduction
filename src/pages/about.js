@@ -5,10 +5,20 @@ import Contact from "src/components/contact";
 import TwoColumn, { TwoColumnMain, TwoColumnSidebar } from "../components/two-column";
 import Image from "next/image"
 import eyecatch from "../images/about_pug_1920*960.png"
+import Meta from "../components/meta"
 
 export default function About() {
 	return (
 		<Container>
+			<Meta
+				pageTitle="アバウト"
+				pageDesc="Who's Portfolio site?"
+				pageImg={eyecatch.src}
+				// eyecatchから高さと横幅を取り出して指定
+				pageImgW={eyecatch.width}
+				pageImgH={eyecatch.height}
+			/>
+
 			<Hero title="About" subtitle="Comment" />
 
 			<figure>
