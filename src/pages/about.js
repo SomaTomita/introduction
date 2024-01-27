@@ -1,6 +1,6 @@
 import Container from "src/components/container";
 import Hero from "src/components/hero";
-import PostBody from "src/components/post-body";
+import PostBody from "src/components/post/post-body";
 import Contact from "src/components/contact";
 import TwoColumn, { TwoColumnMain, TwoColumnSidebar } from "../components/two-column";
 import Image from "next/image"
