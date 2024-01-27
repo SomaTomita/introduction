@@ -6,10 +6,20 @@ import TwoColumn, { TwoColumnMain, TwoColumnSidebar } from "src/components/two-c
 import PostBody from "src/components/post/post-body";
 import ConvertBody from "src/components/post/convert-body";
 import PostCategories from "src/components/post/post-categories";
+import extractText from "src/lib/extract-text"
+import Meta from "src/components/meta"
 
-export default function Schedule({ title, publish, content, eyecatch, categories, }) {
+export default function Schedule({ title, publish, content, eyecatch, categories, description, }) {
 	return (
 		<Container>
+			<Meta
+				pageTitle={title}
+				pageDesc={description}
+				pageImg={eyecatch.url}
+				pageImgW={eyecatch.width}
+				pageImgH={eyecatch.height}
+			/>
+
 			<article>
 				<PostHeader title={title} subtitle="Contents" publish={publish} />
 
@@ -43,15 +53,18 @@ export default function Schedule({ title, publish, content, eyecatch, categories
 
 export async function getStaticProps() {
 	const slug = 'テスト'
-
 	const post = await getPostBySlug(slug)
+
+	const description = extractText(post.content)
+
 	return {
 		props: {
 			title: post.title,
 			publish: post.publishDate,
 			content: post.content,
 			eyecatch: post.eyecatch,
-			categories: post.categories
+			categories: post.categories,
+			description: description
 		},
 	}
 }
