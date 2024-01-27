@@ -1,10 +1,13 @@
 import Container from "src/components/container";
-import { getPostBySlug } from "../../lib/api"
+import { getPostBySlug } from "../../lib/api";
+import PostHeader from "src/components/post-header";
 
-export default function Schedule({ title, publishData, content, eyecatch, categories, }) {
+export default function Schedule({ title, publish, content, eyecatch, categories, }) {
 	return (
 		<Container>
-			<h1>{title}</h1>
+			<article>
+				<PostHeader title={title} subtitle="Contents" publish={publish} />
+			</article>
 		</Container>
 	)
 }
