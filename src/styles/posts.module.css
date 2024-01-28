@@ -1,0 +1,20 @@
+.gridContainer {
+	display: grid;
+	/* 2列のレイアウト。各列は利用可能なスペースを均等に分割 */
+	grid-template-columns: 1fr 1fr;
+	gap: var(--space-jump);
+	margin-top: var(--space-xs);
+	margin-bottom: var(--space-lg);
+}
+  
+.post h2 {
+	margin-top: 0.5em;
+	font-size: var(--small-heading3);
+	font-weight: 400;
+}
+  
+.post figure {
+	position: relative;
+	/* 幅と高さの比率 (今回は幅が高さの約1.78倍であることを意味) */
+	aspect-ratio: 16/9;
+}
