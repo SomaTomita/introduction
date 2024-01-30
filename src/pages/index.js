@@ -1,4 +1,4 @@
-import Container from "src/components/container";
+import Container from "src/components/layout/container";
 import Hero from "src/components/hero";
 import Meta from "src/components/meta";
 import Pagenation from "src/components/post/pagenation";

@@ -1,4 +1,4 @@
-import styles from "../styles/hero.module.css"
+import styles from "src/styles/hero.module.css"
 import Image from "next/image"
 import pug from "../images/hero_pug-1500*1300.png"
 

@@ -1,8 +1,8 @@
-import Container from "src/components/container";
+import Container from "src/components/layout/container";
 import { getPostBySlug, getAllSlugs } from "src/lib/api";
 import PostHeader from "src/components/post/post-header";
 import Image from "next/image"
-import TwoColumn, { TwoColumnMain, TwoColumnSidebar } from "src/components/two-column";
+import TwoColumn, { TwoColumnMain, TwoColumnSidebar } from "src/components/layout/two-column";
 import PostBody from "src/components/post/post-body";
 import ConvertBody from "src/components/post/convert-body";
 import PostCategories from "src/components/post/post-categories";

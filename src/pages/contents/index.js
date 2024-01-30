@@ -1,6 +1,6 @@
 import { getAllPosts } from 'src/lib/api'
 import Meta from 'src/components/meta'
-import Container from 'src/components/container'
+import Container from 'src/components/layout/container'
 import Hero from 'src/components/hero'
 import Posts from 'src/components/post/posts'
 // import { getPlaiceholder } from 'plaiceholder'
@@ -12,7 +12,7 @@ export default function Contents({ posts }) {
 		<Container>
 			<Meta pageTitle="ブログ" pageDesc="ブログの記事一覧" />
 
-			<Hero title="Contents" subtitle="Recent Posts" />
+			<Hero title="Posts" subtitle="Recent Posts" />
 
 			<Posts posts={posts} />
 		</Container>

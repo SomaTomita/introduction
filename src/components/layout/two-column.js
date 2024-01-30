@@ -1,4 +1,4 @@
-import styles from "../styles/two-column.module.css"
+import styles from "src/styles/two-column.module.css"
 
 export default function TwoColumn({ children }) {
 	return (

@@ -45,7 +45,7 @@ export default function Nav() {
 				</li>
 				<li>
 					<Link href="/contents">
-						<span onClick={closeNav}>Contents</span>
+						<span onClick={closeNav}>Posts</span>
 					</Link>
 				</li>
 			</ul>

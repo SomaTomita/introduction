@@ -1,8 +1,8 @@
-import Container from "src/components/container";
+import Container from "src/components/layout/container";
 import Hero from "src/components/hero";
 import PostBody from "src/components/post/post-body";
 import Contact from "src/components/contact";
-import TwoColumn, { TwoColumnMain, TwoColumnSidebar } from "../components/two-column";
+import TwoColumn, { TwoColumnMain, TwoColumnSidebar } from "../components/layout/two-column";
 import Image from "next/image"
 import eyecatch from "../images/about_pug_1920*960.png"
 import Meta from "../components/meta"

@@ -1,4 +1,4 @@
-import styles from "../styles/container.module.css"
+import styles from "src/styles/container.module.css"
 
 export default function Container({ children, large = false }) {
 	return (
