@@ -5,9 +5,15 @@ import PostHeader from 'src/components/post/post-header'
 import Posts from 'src/components/post/posts'
 // import { getPlaiceholder } from 'plaiceholder'
 import { eyecatchLocal } from 'src/lib/constants' // ローカルの代替アイキャッチ画像
+import type { PostListItem } from 'src/types'
+import type { GetStaticPaths, GetStaticProps } from 'next'
 
+interface CategoryPageProps {
+	name: string
+	posts: PostListItem[]
+}
 
-export default function Category({ name, posts }) {
+export default function Category({ name, posts }: CategoryPageProps) {
 	return (
 		<Container>
 			<Meta pageTitle={name} pageDesc={`${name}に関する記事`} />
@@ -17,8 +23,7 @@ export default function Category({ name, posts }) {
 	)
 }
 
-
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
 	const allCats = await getAllCategories()
 	return {
 		paths: allCats.map(({ slug }) => `/contents/category/${slug}`),
@@ -26,21 +31,23 @@ export async function getStaticPaths() {
 	}
 }
 
-
-export async function getStaticProps(context) {
-
+export const getStaticProps: GetStaticProps<CategoryPageProps> = async (context) => {
 	const allCats = await getAllCategories()
 
 	// slugに基づいて該当するカテゴリを検索
-	const catSlug = context.params.slug
+	const catSlug = context.params?.slug as string
 	const cat = allCats.find(({ slug }) => slug === catSlug)
+
+	if (!cat) {
+		return { notFound: true }
+	}
 
 	// カテゴリIDに基づいて投稿を取得
 	const posts = await getAllPostsByCategory(cat.id)
 
 	// 取得した投稿にアイキャッチがない場合は、デフォルトの画像を設定
 	for (const post of posts) {
-		if (!post.hasOwnProperty('eyecatch')) {
+		if (!post.eyecatch) {
 			post.eyecatch = eyecatchLocal
 		}
 		// const { base64 } = await getPlaiceholder(post.eyecatch.url)
