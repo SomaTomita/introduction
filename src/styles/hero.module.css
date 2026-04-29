@@ -1,5 +1,5 @@
-.flexContainer{
-	composes: sideBySideCenter from "./utils.module.css"
+.flexContainer {
+	composes: sideBySideCenter from './utils.module.css';
 }
 
 .text {
@@ -10,7 +10,11 @@
 .title {
 	font-size: var(--display);
 	font-weight: 900;
-	letter-spacing:  0.15em;
+	letter-spacing: 0.15em;
+	/* 末尾の letter-spacing 分のはみ出しを相殺 */
+	margin-inline-end: -0.15em;
+	/* 長文時に折り返しを許容してコンテナを越えないようにする */
+	overflow-wrap: anywhere;
 }
 
 .subtitle {

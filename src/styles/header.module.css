@@ -1,3 +1,4 @@
-.flexContainer{
-	composes: spaceBetween from "./utils.module.css"
+.flexContainer {
+	composes: spaceBetween from './utils.module.css';
+	gap: 1em;
 }
