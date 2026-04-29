@@ -1,20 +1,41 @@
-import Container from "src/components/layout/container";
-import { getPostBySlug, getAllSlugs } from "src/lib/api";
-import PostHeader from "src/components/post/post-header";
-import Image from "next/image"
-import TwoColumn, { TwoColumnMain, TwoColumnSidebar } from "src/components/layout/two-column";
-import PostBody from "src/components/post/post-body";
-import ConvertBody from "src/components/post/convert-body";
-import PostCategories from "src/components/post/post-categories";
-import extractText from "src/lib/extract-text"
-import Meta from "src/components/meta"
-import { eyecatchLocal } from "src/lib/constants";
+import Container from 'src/components/layout/container'
+import { getPostBySlug, getAllSlugs } from 'src/lib/api'
+import PostHeader from 'src/components/post/post-header'
+import Image from 'next/image'
+import TwoColumn, { TwoColumnMain, TwoColumnSidebar } from 'src/components/layout/two-column'
+import PostBody from 'src/components/post/post-body'
+import ConvertBody from 'src/components/post/convert-body'
+import PostCategories from 'src/components/post/post-categories'
+import extractText from 'src/lib/extract-text'
+import Meta from 'src/components/meta'
+import { eyecatchLocal } from 'src/lib/constants'
 // import { getPlaiceholder } from "plaiceholder"
-import prevNextPost from "src/components/post/prev-next-post"
-import Pagenation from "src/components/post/pagenation";
+import prevNextPost from 'src/components/post/prev-next-post'
+import Pagenation from 'src/components/post/pagenation'
+import type { Eyecatch, Category, SlugEntry } from 'src/types'
+import type { GetStaticPaths, GetStaticProps } from 'next'
 
+interface PostPageProps {
+	title: string
+	publish: string
+	content: string
+	eyecatch: Eyecatch
+	categories: Category[]
+	description: string
+	prevPost: SlugEntry
+	nextPost: SlugEntry
+}
 
-export default function Post({ title, publish, content, eyecatch, categories, description, prevPost, nextPost, }) {
+export default function Post({
+	title,
+	publish,
+	content,
+	eyecatch,
+	categories,
+	description,
+	prevPost,
+	nextPost,
+}: PostPageProps) {
 	return (
 		<Container>
 			<Meta
@@ -38,9 +59,9 @@ export default function Post({ title, publish, content, eyecatch, categories, de
 						height={eyecatch.height}
 						sizes="(min-width: 1152px) 1152px, 100vw"
 						priority
-					// 画像が完全に読み込まれるまで、画像のぼかしバージョンをプレースホルダーとして使用する
-					// placeholder="blur"
-					// blurDataURL={eyecatch.blurDataURL}
+						// 画像が完全に読み込まれるまで、画像のぼかしバージョンをプレースホルダーとして使用する
+						// placeholder="blur"
+						// blurDataURL={eyecatch.blurDataURL}
 					/>
 				</figure>
 
@@ -53,7 +74,7 @@ export default function Post({ title, publish, content, eyecatch, categories, de
 					<TwoColumnSidebar>
 						<PostCategories categories={categories} />
 					</TwoColumnSidebar>
-				</ TwoColumn>
+				</TwoColumn>
 
 				<Pagenation
 					prevText={prevPost.title}
@@ -62,12 +83,11 @@ export default function Post({ title, publish, content, eyecatch, categories, de
 					nextUrl={`/contents/${nextPost.slug}`}
 				/>
 			</article>
-		</Container >
+		</Container>
 	)
 }
 
-
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
 	const allSlugs = await getAllSlugs()
 	return {
 		// getStaticPropsの引数contextとして使用
@@ -76,15 +96,12 @@ export async function getStaticPaths() {
 	}
 }
 
-
-export async function getStaticProps(context) {
-
-	const slug = context.params.slug
+export const getStaticProps: GetStaticProps<PostPageProps> = async (context) => {
+	const slug = context.params?.slug as string
 	const post = await getPostBySlug(slug)
 	if (!post) {
 		return { notFound: true }
 	} else {
-
 		// null合体演算子(eyecatcxhがnullであれば、eyecatchLocal)
 		const eyecatch = post.eyecatch ?? eyecatchLocal
 
