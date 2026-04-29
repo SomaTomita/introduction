@@ -1,4 +1,6 @@
-export const siteMeta = {
+import type { SiteMeta, Eyecatch } from 'src/types'
+
+export const siteMeta: SiteMeta = {
 	siteTitle: 'Intro',
 	siteDesc: 'アウトプットしていくサイト',
 	siteUrl: 'https://*********',
@@ -8,8 +10,7 @@ export const siteMeta = {
 	siteIcon: '/favicon.png',
 }
 
-
-export const eyecatchLocal = {
+export const eyecatchLocal: Eyecatch = {
 	url: '/eyecatch.jpg',
 	width: 1920,
 	height: 1280,
