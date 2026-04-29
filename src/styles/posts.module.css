@@ -6,13 +6,13 @@
 	margin-top: var(--space-xs);
 	margin-bottom: var(--space-lg);
 }
-  
+
 .post h2 {
 	margin-top: 0.5em;
 	font-size: var(--small-heading3);
 	font-weight: 400;
 }
-  
+
 .post figure {
 	position: relative;
 	/* 幅と高さの比率 (今回は幅が高さの約1.78倍であることを意味) */

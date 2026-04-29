@@ -4,6 +4,6 @@
 }
 
 .flexContainer {
-	composes: sideBySideCenter from "./utils.module.css";
+	composes: sideBySideCenter from './utils.module.css';
 	gap: 2em; /* 横並びにする小要素の間隔 */
 }

@@ -1,9 +1,9 @@
 /* .stack の最初の子要素以外のすべての子要素に適用 */
 .stack > * + * {
-	 /* --stack-spaceがない場合、1.5em をデフォルト値 */
+	/* --stack-spaceがない場合、1.5em をデフォルト値 */
 	margin-top: var(--stack-space, 1.5em);
 }
-  
+
 .stack h2,
 .stack h3 {
 	--stack-space: 2em;
