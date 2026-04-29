@@ -1,11 +1,16 @@
-import styles from "src/styles/social.module.css"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faTwitter, faFacebookF, faGithub } from "@fortawesome/free-brands-svg-icons"
+import React from 'react'
+import styles from 'src/styles/social.module.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTwitter, faFacebookF, faGithub } from '@fortawesome/free-brands-svg-icons'
 
-export default function Social({ iconSize = 'initial' }) {
+interface SocialProps {
+	iconSize?: string
+}
+
+export default function Social({ iconSize = 'initial' }: SocialProps) {
 	return (
 		// initialでcssの--icon-size(Contactと違い24px)を参照
-		<ul className={styles.list} style={{ '--icon-size': iconSize }}>
+		<ul className={styles.list} style={{ '--icon-size': iconSize } as React.CSSProperties}>
 			<li>
 				<a href="https://twitter.com/">
 					<FontAwesomeIcon icon={faTwitter} />
