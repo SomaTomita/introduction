@@ -1,9 +1,13 @@
-import styles from "src/styles/posts.module.css"
+import styles from 'src/styles/posts.module.css'
 import Link from 'next/link'
 import Image from 'next/image'
+import type { PostListItem } from 'src/types'
 
+interface PostsProps {
+	posts: PostListItem[]
+}
 
-export default function Posts({ posts }) {
+export default function Posts({ posts }: PostsProps) {
 	return (
 		<div className={styles.gridContainer}>
 			{posts.map(({ title, slug, eyecatch }) => (
@@ -16,8 +20,8 @@ export default function Posts({ posts }) {
 								layout="fill"
 								objectFit="cover"
 								sizes="(min-width: 1152px) 576px, 50vw"
-							// placeholder="blur"
-							// blurDataURL={eyecatch.blurDataURL}
+								// placeholder="blur"
+								// blurDataURL={eyecatch.blurDataURL}
 							/>
 						</figure>
 						<h2>{title}</h2>
