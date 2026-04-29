@@ -1,8 +1,14 @@
-import styles from "src/styles/hero.module.css"
-import Image from "next/image"
-import pug from "../images/hero_pug-1500*1300.png"
+import styles from 'src/styles/hero.module.css'
+import Image from 'next/image'
+import pug from '../images/hero_pug-1500*1300.png'
 
-export default function Hero({ title, subtitle, imageOn = false }) {
+interface HeroProps {
+	title: string
+	subtitle: string
+	imageOn?: boolean
+}
+
+export default function Hero({ title, subtitle, imageOn = false }: HeroProps) {
 	return (
 		<div className={styles.flexContainer}>
 			<div className={styles.text}>
