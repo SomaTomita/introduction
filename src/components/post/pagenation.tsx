@@ -1,14 +1,21 @@
 import styles from 'src/styles/pagenation.module.css'
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronLeft, faChevronRight, } from '@fortawesome/free-solid-svg-icons'
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
+
+interface PagenationProps {
+	prevText?: string
+	prevUrl?: string
+	nextText?: string
+	nextUrl?: string
+}
 
 export default function Pagenation({
 	prevText = '',
 	prevUrl = '',
 	nextText = '',
 	nextUrl = '',
-}) {
+}: PagenationProps) {
 	return (
 		<ul className={styles.flexContainer}>
 			{/* prevTextとprevUrlが両方ともが存在する場合 <li>をレンダリング (真偽値値チェック) */}

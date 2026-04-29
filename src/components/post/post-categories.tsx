@@ -2,10 +2,15 @@ import styles from 'src/styles/post-categories.module.css'
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFolderOpen } from '@fortawesome/free-regular-svg-icons'
+import type { Category } from 'src/types'
 
-export default function PostCategories({ categories }) {
+interface PostCategoriesProps {
+	categories: Category | Category[]
+}
+
+export default function PostCategories({ categories }: PostCategoriesProps) {
 	// 配列のtrue or false
-	const categoriesArr = Array.isArray(categories) ? categories : [categories];
+	const categoriesArr = Array.isArray(categories) ? categories : [categories]
 
 	return (
 		<div className={styles.flexContainer}>
@@ -16,9 +21,7 @@ export default function PostCategories({ categories }) {
 			<ul className={styles.list}>
 				{categoriesArr.map(({ name, slug }) => (
 					<li key={slug}>
-						<Link href={`/contents/${slug}`}>
-							{name}
-						</Link>
+						<Link href={`/contents/${slug}`}>{name}</Link>
 					</li>
 				))}
 			</ul>
