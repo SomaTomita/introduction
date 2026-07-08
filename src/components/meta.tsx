@@ -1,9 +1,7 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-
-// サイトに関する情報
-import { siteMeta } from '../lib/constants'
-const { siteTitle, siteDesc, siteUrl, siteLocale, siteType, siteIcon } = siteMeta
+import { DEFAULT_LOCALE, LOCALES, localizePath, resolveLocale } from 'src/lib/i18n'
+import { siteMetaByLocale } from '../lib/constants'
 
 // 汎用OGP画像
 import siteImg from '../images/ogp.png'
@@ -17,15 +15,18 @@ interface MetaProps {
 }
 
 export default function Meta({ pageTitle, pageDesc, pageImg, pageImgW, pageImgH }: MetaProps) {
+	const router = useRouter()
+	const locale = resolveLocale(router.locale)
+	const { siteTitle, siteDesc, siteUrl, siteLocale, siteType, siteIcon } = siteMetaByLocale[locale]
+
 	// ページのタイトル
 	const title = pageTitle ? `${pageTitle} | ${siteTitle}` : siteTitle
 
 	// ページの説明
 	const desc = pageDesc ?? siteDesc
 
-	// ページのURL
-	const router = useRouter()
-	const url = `${siteUrl}${router.asPath}`
+	// ページのURL(router.asPath にはロケールプレフィックスが含まれないため付与する)
+	const url = `${siteUrl}${localizePath(router.asPath, locale)}`
 
 	// OGP画像
 	const img = pageImg || siteImg.src
@@ -40,6 +41,19 @@ export default function Meta({ pageTitle, pageDesc, pageImg, pageImgW, pageImgH 
 			<meta name="description" content={desc} />
 			<meta property="og:description" content={desc} />
 			<link rel="canonical" href={url} />
+			{LOCALES.map((altLocale) => (
+				<link
+					key={altLocale}
+					rel="alternate"
+					hrefLang={altLocale}
+					href={`${siteUrl}${localizePath(router.asPath, altLocale)}`}
+				/>
+			))}
+			<link
+				rel="alternate"
+				hrefLang="x-default"
+				href={`${siteUrl}${localizePath(router.asPath, DEFAULT_LOCALE)}`}
+			/>
 			<meta property="og:url" content={url} />
 			<meta property="og:site_name" content={siteTitle} />
 			<meta property="og:type" content={siteType} /> {/* コンテンツの種類 */}

@@ -23,10 +23,12 @@ export default function Category({ name, posts }: CategoryPageProps) {
 	)
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
 	const allCats = await getAllCategories()
 	return {
-		paths: allCats.map(({ slug }) => `/contents/category/${slug}`),
+		paths: allCats.flatMap(({ slug }) =>
+			(locales ?? []).map((locale) => ({ params: { slug }, locale })),
+		),
 		fallback: false,
 	}
 }

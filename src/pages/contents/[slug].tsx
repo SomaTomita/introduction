@@ -87,11 +87,14 @@ export default function Post({
 	)
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
 	const allSlugs = await getAllSlugs()
 	return {
-		// getStaticPropsの引数contextとして使用
-		paths: allSlugs.map(({ slug }) => `/contents/${slug}`),
+		// i18n 有効時、文字列 paths はデフォルトロケール分しか生成されないため
+		// 全ロケール × 全スラッグをオブジェクト形式で列挙する
+		paths: allSlugs.flatMap(({ slug }) =>
+			(locales ?? []).map((locale) => ({ params: { slug }, locale })),
+		),
 		fallback: false,
 	}
 }
