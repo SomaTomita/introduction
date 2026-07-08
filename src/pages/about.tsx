@@ -6,13 +6,15 @@ import TwoColumn, { TwoColumnMain, TwoColumnSidebar } from '../components/layout
 import Image from 'next/image'
 import eyecatch from '../images/about_pug_1920*960.png'
 import Meta from '../components/meta'
+import { useDictionary } from 'src/lib/use-dictionary'
 
 export default function About() {
+	const { about } = useDictionary()
 	return (
 		<Container>
 			<Meta
-				pageTitle="アバウト"
-				pageDesc="Who's Portfolio site?"
+				pageTitle={about.pageTitle}
+				pageDesc={about.pageDesc}
 				pageImg={eyecatch.src}
 				// eyecatchから高さと横幅を取り出して指定
 				pageImgW={eyecatch.width}
@@ -36,28 +38,15 @@ export default function About() {
 					{' '}
 					{/* 本文 */}
 					<PostBody>
-						<p>
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem voluptatibus commodi
-							inventore a esse asperiores voluptate quasi ratione saepe minus eligendi ab veritatis
-							suscipit repellat assumenda cumque nam, quidem pariatur!
-						</p>
-						<h2>pug pug pug</h2>
-						<p>
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa eveniet architecto
-							alias quaerat, quod error, iste fugit totam aliquid cum magni explicabo eius delectus
-							earum dolor assumenda nemo similique odit?
-						</p>
-						<p>
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa eveniet architecto
-							alias quaerat, quod error, iste fugit totam aliquid cum magni explicabo eius delectus
-							earum dolor assumenda nemo similique odit?
-						</p>
-						<h3>pug pug pug</h3>
-						<p>
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa eveniet architecto
-							alias quaerat, quod error, iste fugit totam aliquid cum magni explicabo eius delectus
-							earum dolor assumenda nemo similique odit?
-						</p>
+						{about.body.map((block, index) => {
+							if (block.tag === 'h2') {
+								return <h2 key={index}>{block.text}</h2>
+							}
+							if (block.tag === 'h3') {
+								return <h3 key={index}>{block.text}</h3>
+							}
+							return <p key={index}>{block.text}</p>
+						})}
 					</PostBody>
 				</TwoColumnMain>
 				<TwoColumnSidebar>

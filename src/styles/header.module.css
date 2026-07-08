@@ -2,3 +2,9 @@
 	composes: spaceBetween from './utils.module.css';
 	gap: 1em;
 }
+
+.navGroup {
+	display: flex;
+	align-items: center;
+	gap: 1.5em;
+}

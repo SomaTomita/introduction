@@ -7,15 +7,17 @@ import Posts from 'src/components/post/posts'
 import { eyecatchLocal } from 'src/lib/constants' // ローカルの代替アイキャッチ画像
 import type { PostListItem } from 'src/types'
 import type { GetStaticProps } from 'next'
+import { useDictionary } from 'src/lib/use-dictionary'
 
 interface ContentsProps {
 	posts: PostListItem[]
 }
 
 export default function Contents({ posts }: ContentsProps) {
+	const { posts: postsDict } = useDictionary()
 	return (
 		<Container>
-			<Meta pageTitle="ブログ" pageDesc="ブログの記事一覧" />
+			<Meta pageTitle={postsDict.pageTitle} pageDesc={postsDict.pageDesc} />
 
 			<Hero title="Posts" subtitle="Recent Posts" />
 
