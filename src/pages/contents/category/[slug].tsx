@@ -7,6 +7,7 @@ import Posts from 'src/components/post/posts'
 import { eyecatchLocal } from 'src/lib/constants' // ローカルの代替アイキャッチ画像
 import type { PostListItem } from 'src/types'
 import type { GetStaticPaths, GetStaticProps } from 'next'
+import { useDictionary } from 'src/lib/use-dictionary'
 
 interface CategoryPageProps {
 	name: string
@@ -14,9 +15,10 @@ interface CategoryPageProps {
 }
 
 export default function Category({ name, posts }: CategoryPageProps) {
+	const { category } = useDictionary()
 	return (
 		<Container>
-			<Meta pageTitle={name} pageDesc={`${name}に関する記事`} />
+			<Meta pageTitle={name} pageDesc={category.pageDesc(name)} />
 			<PostHeader title={name} subtitle="Blog Contents Category" />
 			<Posts posts={posts} />
 		</Container>

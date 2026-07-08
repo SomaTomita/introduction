@@ -1,0 +1,21 @@
+.list {
+	display: flex;
+	gap: 0.75em;
+	list-style: none;
+	padding: 0;
+	font-size: 0.875rem;
+}
+
+.current {
+	font-weight: 700;
+}
+
+.list a {
+	color: var(--gray-75);
+}
+
+@media (hover: hover) {
+	.list a:hover {
+		color: var(--accent);
+	}
+}
