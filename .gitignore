@@ -34,3 +34,9 @@ yarn-error.log*
 # typescriptµ
 *.tsbuildinfo
 next-env.d.ts
+
+# CMS 入稿用の下書き・素材(公開リポジトリに載せない: 実名/CV相互参照/大学著作権の写真を含む)
+/docs/introduction-cms/
+
+# 実装計画(ローカル作業用・公開リポジトリに載せない)
+/docs/plan/
