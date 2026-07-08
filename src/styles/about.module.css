@@ -1,0 +1,8 @@
+.updated {
+	display: flex;
+	gap: 0.5em;
+	align-items: center;
+	margin-top: var(--space-sm);
+	color: var(--gray-50);
+	font-size: var(--small-heading3);
+}

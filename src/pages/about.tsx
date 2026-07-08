@@ -7,9 +7,25 @@ import Image from 'next/image'
 import eyecatch from '../images/about_pug_1920*960.png'
 import Meta from '../components/meta'
 import { useDictionary } from 'src/lib/use-dictionary'
+import { aboutLastUpdated } from 'src/lib/dictionary'
+import { resolveLocale } from 'src/lib/i18n'
+import { useRouter } from 'next/router'
+import { parseISO, format } from 'date-fns'
+import { ja, enUS } from 'date-fns/locale'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faClock } from '@fortawesome/free-regular-svg-icons'
+import styles from 'src/styles/about.module.css'
+
+const dateLocale = { ja, en: enUS } as const
+const datePattern = { ja: 'yyyy年MM月dd日', en: 'MMMM d, yyyy' } as const
 
 export default function About() {
 	const { about } = useDictionary()
+	const locale = resolveLocale(useRouter().locale)
+	const updatedLabel = format(parseISO(aboutLastUpdated), datePattern[locale], {
+		locale: dateLocale[locale],
+	})
+
 	return (
 		<Container>
 			<Meta
@@ -48,6 +64,13 @@ export default function About() {
 							return <p key={index}>{block.text}</p>
 						})}
 					</PostBody>
+					{/* 最終更新日(dictionary.ts の aboutLastUpdated を手で更新する) */}
+					<p className={styles.updated}>
+						<FontAwesomeIcon icon={faClock} size="lg" color="var(--gray-25)" />
+						<span>
+							{about.lastUpdatedLabel} <time dateTime={aboutLastUpdated}>{updatedLabel}</time>
+						</span>
+					</p>
 				</TwoColumnMain>
 				<TwoColumnSidebar>
 					{' '}
