@@ -96,6 +96,18 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 | `npm run format`       | Format the codebase with Prettier        |
 | `npm run format:check` | Check formatting without writing changes |
 
+## Architecture
+
+![Site architecture diagram](docs/architecture/site-architecture.png)
+
+Diagram made with [mingrammer/diagrams](https://github.com/mingrammer/diagrams) (source: `docs/architecture/generate_diagram.py`).
+
+- **GitHub → Vercel**: `git push` triggers Vercel's own build/deploy (via its GitHub integration, not an in-repo CI config), which then builds & serves the Next.js app below.
+- **`_app.tsx`** wraps every page in `Layout` (Header/Footer/Container), so the shared chrome — `meta.tsx`, `nav`, `logo`, `social`, `lang-switcher` — is rendered on all routes. Pages add their own `post/*` and `hero`/`contact` components on top.
+- **Content is fetched at build time.** The four CMS-backed pages (`index`, `contents/index`, `contents/[slug]`, `contents/category/[slug]`) call `api.ts` from `getStaticProps` / `getStaticPaths`; `about.tsx` uses no CMS data. `api.ts` reads credentials through `env.ts` (zod), parses every microCMS response with `schemas.ts` (zod), and reports failures through `logger.ts`. Remote eyecatch images are loaded from `images.microcms-assets.io` via `next/image`.
+- **`ja`/`en` routing** is configured in `next.config.mjs` (`localeDetection` is off — switching is UI-only). `i18n.ts` supplies the locale helpers used by `meta.tsx` and `lang-switcher`, and `dictionary.ts` / `use-dictionary.ts` supply the localized copy.
+- **Vitest** covers the pure `lib` modules (`i18n`, `dictionary`, `constants`).
+
 ## Project Structure
 
 ```
